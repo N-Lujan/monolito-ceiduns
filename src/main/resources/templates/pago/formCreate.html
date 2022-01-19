@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+	<header th:replace="plantilla/template :: header"></header>
+	<main class="container p-0" role="main">
+		<div class="container bg-light p-5 rounded mx-auto">
+			<h4>Datos de Pago</h4>
+			<hr>
+			<form class="row g-3" th:object="${pago}"
+				  th:action="@{/pago/save}" method="post">
+				<div class="hide">
+					<input type="hidden" id="inputId" placeholder="Ingrese Id"
+						   th:class="${#fields.hasErrors('id')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{id}" th:value="*{id}">
+
+					<div class="invalid-feedback">
+						<small th:errors="*{id}">error</small>
+						<div></div>
+					</div>
+				</div>
+
+				<div class="hide">
+					<input type="hidden" id="inputAlumno" placeholder="Ingrese Alumno"
+						   th:class="${#fields.hasErrors('alumno.id')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{alumno.id}" th:value="*{alumno.id}">
+
+					<div class="invalid-feedback">
+						<small th:errors="*{alumno.id}">error</small>
+						<div></div>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputNroPago" class="form-label">Nro. Pago</label>
+					<input type="text" id="inputNroPago" placeholder="Ingrese Nro. Pago" th:class="${#fields.hasErrors('nroPago')}?
+                    'form-control is-invalid' : 'form-control'" th:field="*{nroPago}" th:value="*{nroPago}">
+
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{nroPago}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputMonto" class="form-label">Precio</label>
+					<input type="text" id="inputMonto" placeholder="Ingrese monto"
+						   th:class="${#fields.hasErrors('monto')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{monto}" th:value="*{monto}">
+
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{monto}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputTitular" class="form-label">Titular</label>
+					<input type="text" id="inputTitular" placeholder="Nombre del titular de la cuenta" th:class="${#fields.hasErrors('titular')}?
+                    'form-control is-invalid' : 'form-control'" th:field="*{titular}" th:value="*{titular}">
+
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{titular}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputDni" class="form-label">DNI</label>
+					<input type="text" id="inputDni" placeholder="Ingrese DNI del titular" th:class="${#fields.hasErrors('dni')}?
+                    'form-control is-invalid' : 'form-control'" th:field="*{dni}" th:value="*{dni}">
+
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{dni}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectTipoPago" class="form-label">TipoPago</label>
+					<select id="selectTipoPago" name="tipoPago"
+							th:class="${#fields.hasErrors('tipoPago')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option th:each="tipo : ${tipoPagos}"
+								th:value="${tipo.nombre}"
+								th:text="${tipo.nombre}"
+								th:selected="${tipo.nombre}==*{tipoPago}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{tipoPago}">error</small>
+					</div>
+				</div>
+
+				<div class="col-12 mb-1">
+					<button type="submit" class="btn btn-outline-primary">
+						Aceptar
+					</button>
+					<a class="btn btn-outline-secondary" th:href="@{/alumno/index}" role="button">
+						Cancelar
+					</a>
+				</div>
+			</form>
+		</div>
+
+	</main>
+	<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>

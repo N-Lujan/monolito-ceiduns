@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title>Ceiduns</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="icon" th:href="@{/images/icon.png}">
+	<style type="text/css">
+		h4 {
+			padding-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/index}">
+					<img th:src="@{/images/icono-app.png}" alt="" width="48" class="d-inline-block align-text-top">
+					<strong>Ceiduns</strong>
+				</a>
+				
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<!-- ENLACES DEL MENU -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link"th:href="@{/alumno/index}">Alumnos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"th:href="@{/aula/index}">Aulas</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"th:href="@{/horario/index}">Horarios</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"th:href="@{/curso/index}">Cursos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"th:href="@{/pago/search}">Pagos</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMatricula" role="button" data-bs-toggle="dropdown" aria-expanded="false">Matricula
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" th:href="@{/matricula/search}">Registrar Matrícula</a>
+								</li>
+								<li>
+									<a class="dropdown-item" th:href="@{/curso/monitorearMatricula}">Monitorear Matrícula</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li>
+									<a class="dropdown-item" th:href="@{/}">Salir</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main th:fragment="site-main" class="container p-0">
+		<div class="text-center bg-light p-5 rounded">
+			<img th:src="@{/images/icono-app.png}" alt="" width="500" class="img img-fluid">
+			<h1 class="mt-4 pt-4">Centro de Idiomas UNS</h1>
+			<p class="lead">
+				Universidad Nacional del santa
+			</p>
+			<a class="btn btn-lg btn-danger" th:href="@{/}" role="button">Continuar &raquo;</a>
+		</div>
+	</main>
+
+	<footer th:fragment="footer">
+		<div class="container fixed-bottom">
+			<p>&copy; Ceiduns</p>
+		</div>
+		<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	</footer>
+
+</body>
+</html>

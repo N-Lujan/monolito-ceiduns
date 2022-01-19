@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+	<header th:replace="plantilla/template :: header"></header>
+	<main class="container p-0" role="main">
+		<div class="container bg-light p-5 rounded mx-auto">
+			<h4>Datos de Horario</h4>
+			<hr>
+			<form class="row g-3" th:object="${horario}"
+				  th:action="${horario.id != null} ?
+				  			@{/horario/edit} : @{/horario/save}" method="post">
+				<div class="hide">
+					<input type="hidden" id="inputId" placeholder="Ingrese Id"
+						   th:class="${#fields.hasErrors('id')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{id}" th:value="*{id}">
+
+					<div class="invalid-feedback">
+						<small th:errors="*{id}">error</small>
+						<div></div>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectTurno" class="form-label">Turno:</label>
+					<select id="selectTurno" name="turno"
+							th:class="${#fields.hasErrors('turno')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione turno --</option>
+						<option th:each="tur : ${listTurnos}"
+								th:value="${tur.days}"
+								th:text="${tur.days}"
+								th:selected="${tur.days}==*{turno}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{turno}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputInicio" class="form-label">Inicio</label>
+					<input type="time" id="inputInicio" th:class="${#fields.hasErrors('inicio')}?
+                           'form-control is-invalid' : 'form-control'"
+						   th:field="*{inicio}" th:value="*{inicio}">
+				</div>
+
+				<div class="valid-feedback">
+					<small>Correcto</small>
+				</div>
+				<div class="invalid-feedback">
+					<small th:errors="*{inicio}">error</small>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputFin" class="form-label">Fin</label>
+					<input type="time" id="inputFin" th:class="${#fields.hasErrors('fin')}?
+                           'form-control is-invalid' : 'form-control'"
+						   th:field="*{fin}" th:value="*{fin}">
+				</div>
+
+				<div class="valid-feedback">
+					<small>Correcto</small>
+				</div>
+				<div class="invalid-feedback">
+					<small th:errors="*{fin}">error</small>
+				</div>
+
+				<div class="col-12 mb-1">
+					<button type="submit" class="btn btn-outline-primary">
+						Aceptar
+					</button>
+					<a class="btn btn-outline-secondary" th:href="@{/horario/index}" role="button">
+						Cancelar
+					</a>
+				</div>
+			</form>
+		</div>
+
+	</main>
+	<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>

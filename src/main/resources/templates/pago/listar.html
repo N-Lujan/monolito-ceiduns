@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+    <header th:replace="plantilla/template :: header"></header>
+    <main class="container p-0" role="main">
+        <div class="container">
+            <article>
+                <header>
+                    <h4 th:text="'Listado Pagos - ' +
+                     ${alumno.apellido} + ', ' +
+                     ${alumno.nombre}">Listado Pagos</h4>
+                </header>
+                <table class="table table-striped table.bordered">
+                    <thead>
+                        <tr>
+                            <th>Nro. Pago</th>
+                            <th>Titular Cuenta</th>
+                            <th>DNI Titular</th>
+                            <th>Monto</th>
+                            <th>Tipo Pago</th>
+                            <th>Fecha Pago</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pago : ${alumno.pagos}">
+                            <td th:text="${pago.nroPago}"></td>
+                            <td th:text="${pago.titular}"></td>
+                            <td th:text="${pago.dni}"></td>
+                            <td th:text="${pago.monto}"></td>
+                            <td th:text="${pago.tipoPago}"></td>
+                            <td th:text="${#calendars.format(pago.fechaPago, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${pago.estado}"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">
+                                <a class="btn btn-outline-primary" th:href="@{/pago/createFor/}+${alumno.id}" role="button">
+                                    Agregar Pago
+                                </a>
+                                <a class="btn btn-outline-secondary" th:href="@{/pago/search}" role="button">
+                                    Regresar
+                                </a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </article>
+        </div>
+    </main>
+    <footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>

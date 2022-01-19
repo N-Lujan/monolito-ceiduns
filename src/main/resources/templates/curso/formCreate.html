@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+	<header th:replace="plantilla/template :: header"></header>
+	<main class="container p-0" role="main">
+		<div class="container bg-light p-5 rounded mx-auto">
+			<h4>Datos de Curso</h4>
+			<hr>
+			<form class="row g-3" th:object="${curso}"
+				  th:action="${curso.id != null} ?
+				  			@{/curso/edit} : @{/curso/save}" method="post">
+				<div class="hide">
+					<input type="hidden" id="inputId" placeholder="Ingrese Id"
+						   th:class="${#fields.hasErrors('id')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{id}" th:value="*{id}">
+
+					<div class="invalid-feedback">
+						<small th:errors="*{id}">error</small>
+						<div></div>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectIdioma" class="form-label">Idioma</label>
+					<select id="selectIdioma" name="idioma"
+							th:class="${#fields.hasErrors('idioma')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione idioma --</option>
+						<option th:each="lenguaje : ${idiomas}"
+								th:value="${lenguaje.nombre}"
+								th:text="${lenguaje.nombre}"
+								th:selected="${lenguaje.nombre}==*{idioma}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{idioma}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectNivel" class="form-label">Nivel</label>
+					<select id="selectNivel" name="nivel"
+							th:class="${#fields.hasErrors('nivel')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione nivel --</option>
+						<option th:each="level : ${niveles}"
+								th:value="${level.nombre}"
+								th:text="${level.nombre}"
+								th:selected="${level.nombre}==*{nivel}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{nivel}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectCiclo" class="form-label">Ciclo</label>
+					<select id="selectCiclo" name="ciclo"
+							th:class="${#fields.hasErrors('ciclo')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione ciclo --</option>
+						<option th:each="cycle : ${ciclos}"
+								th:value="${cycle.nro}"
+								th:text="${cycle.nro}"
+								th:selected="${cycle.nro}==*{ciclo}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{ciclo}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="inputPrecio" class="form-label">Precio</label>
+					<input type="text" id="inputPrecio" placeholder="Ingrese precio"
+						   th:class="${#fields.hasErrors('precio')}?
+                                    'form-control is-invalid' : 'form-control'"
+						   th:field="*{precio}" th:value="*{precio}">
+
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{precio}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectAula" class="form-label">Horario:</label>
+					<select id="selectAula" name="horario.id"
+							th:class="${#fields.hasErrors('horario.id')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione horario --</option>
+						<option th:each="shorario : ${horarios}"
+								th:value="${shorario.id}"
+								th:text="${shorario.turno} + ' | ' +${{shorario.inicio}} + '-' +${{shorario.fin}}"
+								th:selected="${shorario.id}==*{horario.id}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{horario.id}">error</small>
+					</div>
+				</div>
+
+				<div class="col-md-6 mb-3">
+					<label for="selectAula" class="form-label">Aula:</label>
+					<select id="selectHorario" name="aula.id"
+							th:class="${#fields.hasErrors('aula.id')} ?
+                                'form-control is-invalid' : 'form-control'">
+						<option value="">-- Seleccione aula --</option>
+						<option th:each="saula : ${aulas}"
+								th:value="${saula.id}"
+								th:text="${saula.nombre}"
+								th:selected="${saula.id}==*{aula.id}"/>
+					</select>
+					<div class="valid-feedback">
+						<small>Correcto</small>
+					</div>
+					<div class="invalid-feedback">
+						<small th:errors="*{aula.id}">error</small>
+					</div>
+				</div>
+
+				<div class="col-12 mb-1">
+					<button type="submit" class="btn btn-outline-primary">
+						Aceptar
+					</button>
+					<a class="btn btn-outline-secondary" th:href="@{/curso/index}" role="button">
+						Cancelar
+					</a>
+				</div>
+			</form>
+		</div>
+
+	</main>
+	<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>
